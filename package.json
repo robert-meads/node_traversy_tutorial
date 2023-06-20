@@ -9,7 +9,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "node script.js",
-    "run": "nodemon script.js"
+    "dev": "nodemon script.js"
   },
   "keywords": [],
   "author": "",
