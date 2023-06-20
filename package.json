@@ -1,0 +1,17 @@
+{
+  "name": "node_traversy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "dependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node script.js",
+    "run": "nodemon script.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
