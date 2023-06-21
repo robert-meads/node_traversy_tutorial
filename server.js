@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     // We don't need to res.write and res.end. We can send data via res.end.
     res.end(JSON.stringify(employees));
   } else {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify('URL NOT FOUND!'));
   }
 });
