@@ -2,7 +2,7 @@ const http = require('http');
 const employees = require('./data/employees.json');
 
 const server = http.createServer((req, res) => {
-  if (req.url === '/api/employees') {
+  if (req.url === '/api/employees' && req.method === 'GET') {
     // setHeader, setStatus can be condensed into one function: writeHead as this func takes status and content-type property.
     res.writeHead(200, { 'Content-Type': 'application/json' });
 
