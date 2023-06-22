@@ -11,7 +11,6 @@ const server = http.createServer((req, res) => {
     req.url.match(/\/api\/employees\/[0-9]+/) &&
     req.method === 'GET'
   ) {
-    console.log(req.url.split('/'));
     const id = req.url.split('/')[3];
     getSingleEmployee(req, res, id);
   } else {
