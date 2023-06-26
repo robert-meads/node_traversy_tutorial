@@ -2,6 +2,7 @@ const {
   findAllEmployees,
   findSingleEmployee,
 } = require('../model/employeesModel');
+const { v4: uuidv4 } = require('uuid');
 
 async function getAllEmployees(req, res) {
   const employees = await findAllEmployees();
