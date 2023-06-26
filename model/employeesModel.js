@@ -13,7 +13,16 @@ function findSingleEmployee(id) {
   });
 }
 
+function createEmployee(newEmployee) {
+  return new Promise((resolve, reject) => {
+    employees.push(newEmployee);
+
+    const filepath = `${__dirname}/../data/employeesCopy.json`;
+  });
+}
+
 module.exports = {
   findAllEmployees,
   findSingleEmployee,
+  createEmployee,
 };

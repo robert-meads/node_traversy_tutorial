@@ -2,6 +2,7 @@ const http = require('http');
 const {
   getAllEmployees,
   getSingleEmployee,
+  addEmployee,
 } = require('./controller/employeesController');
 
 const server = http.createServer((req, res) => {
@@ -13,6 +14,8 @@ const server = http.createServer((req, res) => {
   ) {
     const id = req.url.split('/')[3];
     getSingleEmployee(req, res, id);
+  } else if (req.url === '/api/employees' && req.method === 'POST') {
+    addEmployee(req, res);
   } else {
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify('URL NOT FOUND!'));
