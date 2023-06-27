@@ -23,15 +23,6 @@ async function getSingleEmployee(req, res, id) {
 }
 
 async function addEmployee(req, res) {
-  // Assume we got data from request's body.
-  const newEmployee = {
-    id: uuidv4(),
-    first_name: 'Bobs',
-    last_name: 'Burgers',
-    email: 'tina_is_crazy@yahoo.com',
-    gender: 'burger',
-  };
-
   const addedEmployee = await createEmployee(newEmployee);
   res.writeHead(200, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(addedEmployee));
