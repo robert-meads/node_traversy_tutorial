@@ -31,6 +31,14 @@ async function connect() {
     // await students.updateOne({ name: 'God' }, { $inc: { age: -999 } });
     // const god = await students.findOne({ name: 'God' });
     // console.log('Here is updated god ', god);
+
+    // Remove God.
+    // await students.deleteOne({ name: 'God' });
+    // const god = await students.findOne({ name: 'God' });
+    // console.log('Does god exist after deletion? ', god);
+
+    // Check if god exists in students collection.
+    // await printAll(results);
   } catch (err) {
     console.log(err);
   } finally {
