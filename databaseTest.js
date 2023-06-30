@@ -27,6 +27,10 @@ async function connect() {
     // const god = await students.findOne({ name: 'God' });
     // console.log('Here is god ', god);
 
+    // Update God's age to be 1.
+    // await students.updateOne({ name: 'God' }, { $inc: { age: -999 } });
+    // const god = await students.findOne({ name: 'God' });
+    // console.log('Here is updated god ', god);
   } catch (err) {
     console.log(err);
   } finally {
