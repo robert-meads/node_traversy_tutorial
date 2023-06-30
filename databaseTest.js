@@ -18,9 +18,15 @@ async function connect() {
     const results = students.find();
     // await printAll(results);
 
-    // find Huey. .find() returns a cursor that you need to .toArray() to convert to something I can print in console. .findOne() returns something I don't need to call .toArray().
-    const huey = await students.findOne({ name: 'Huey' });
-    console.log('Here is huey ', huey);
+    // find Huey.
+    // const huey = await students.findOne({ name: 'Huey' });
+    // console.log('Here is huey ', huey);
+
+    // insert God with age 1000.
+    // await students.insertOne({ name: 'God', age: 1000 });
+    // const god = await students.findOne({ name: 'God' });
+    // console.log('Here is god ', god);
+
   } catch (err) {
     console.log(err);
   } finally {
