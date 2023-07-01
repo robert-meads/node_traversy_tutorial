@@ -2,6 +2,7 @@ const {
   findAllEmployees,
   findSingleEmployee,
   createEmployee,
+  updateEmployee,
 } = require('../model/employeesModel');
 const { v4: uuidv4 } = require('uuid');
 const { getBodyData } = require('../util');
@@ -45,8 +46,40 @@ async function addEmployee(req, res) {
   }
 }
 
+async function changeEmployee(req, res, id) {
+  try {
+    // get the original employee that we're updating.
+    const originalEmployee = await findSingleEmployee(id);
+
+    // if the employee we're trying to modify doesnt exist
+    if (originalEmployee) {
+      // get the body data.
+      const body = await getBodyData(req);
+      const { first_name, last_name, email, gender } = JSON.parse(body);
+
+      const updatedEmployeeData = {
+        id,
+        first_name: first_name || originalEmployee.first_name,
+        last_name: last_name || originalEmployee.last_name,
+        email: email || originalEmployee.email,
+        gender: gender || originalEmployee.gender,
+      };
+      const updatedEmployee = await updateEmployee(updatedEmployeeData, id);
+      console.log('Heres updatedEmployee: ', updatedEmployee);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(updatedEmployee));
+    } else {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify(`No employee with ${id} was found.`));
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 module.exports = {
   getAllEmployees,
   getSingleEmployee,
   addEmployee,
+  changeEmployee,
 };

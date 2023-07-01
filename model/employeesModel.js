@@ -27,7 +27,34 @@ function createEmployee(newEmployee) {
       );
       resolve(newlyCreatedEmployee);
     } catch (err) {
-      console.log(err);
+      reject(err);
+    }
+  });
+}
+
+async function updateEmployee(data, id) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // find the original employee with matching id
+      const originalEmployeeIndex = employees.findIndex(
+        (employee) => employee.id === parseInt(id)
+      );
+      console.log('id: ', originalEmployeeIndex);
+
+      // overwrite original employee data with updated employee data.
+      employees[originalEmployeeIndex] = {
+        ...data,
+      };
+
+      const filepath = `${__dirname}/../data/employeesCopy.json`;
+      const updatedEmployee = await writeDataAsyncPromise(
+        filepath,
+        employees,
+        data
+      );
+      resolve(data);
+    } catch (err) {
+      reject(err);
     }
   });
 }
@@ -36,4 +63,5 @@ module.exports = {
   findAllEmployees,
   findSingleEmployee,
   createEmployee,
+  updateEmployee,
 };

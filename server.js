@@ -3,6 +3,7 @@ const {
   getAllEmployees,
   getSingleEmployee,
   addEmployee,
+  changeEmployee
 } = require('./controller/employeesController');
 
 const server = http.createServer((req, res) => {
@@ -16,6 +17,14 @@ const server = http.createServer((req, res) => {
     getSingleEmployee(req, res, id);
   } else if (req.url === '/api/employees' && req.method === 'POST') {
     addEmployee(req, res);
+  } else if (
+    req.url.match(/\/api\/employees\/[0-9]+/) &&
+    req.method === 'PUT'
+  ) {
+    const id = req.url.split('/')[3];
+    
+    // Even though changeEmployee() is an async function, since we don't await it, the worst it can do is just run to completion eventually and we'll have unexpected behavior IF there was more processing that depended on the completion of changeEmployee(). However, this is a standalone 'if statement' code block with no dependents like a .then() in a promise.
+    changeEmployee(req, res, id);
   } else {
     res.writeHead(404, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify('URL NOT FOUND!'));
