@@ -3,6 +3,7 @@ const {
   findSingleEmployee,
   createEmployee,
   updateEmployee,
+  deleteEmployee,
 } = require('../model/employeesModel');
 const { v4: uuidv4 } = require('uuid');
 const { getBodyData } = require('../util');
@@ -77,9 +78,17 @@ async function changeEmployee(req, res, id) {
   }
 }
 
+async function removeEmployee(req, res, id) {
+  // assume id exists, ids start at 1 up to 1000.
+  const deletedEmployee = await deleteEmployee(id);
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify(deletedEmployee));
+}
+
 module.exports = {
   getAllEmployees,
   getSingleEmployee,
   addEmployee,
   changeEmployee,
+  removeEmployee,
 };

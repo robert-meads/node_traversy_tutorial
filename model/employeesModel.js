@@ -1,4 +1,6 @@
-const employees = require('../data/employees.json');
+// Need to make employees a modifiable array b/c array.filter operates on shallow copy, shallow copy
+// being the original array. If it were const, our array would not filter if we used array.filter().
+let employees = require('../data/employees.json');
 const { writeDataAsyncPromise } = require('../util');
 
 function findAllEmployees() {
@@ -59,9 +61,35 @@ async function updateEmployee(data, id) {
   });
 }
 
+function deleteEmployee(id) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      console.log(employees[id - 1]);
+      toBeDeleted = employees[id - 1];
+      const newEmployees = employees.filter(
+        (employee) => employee.id !== parseInt(id)
+      );
+      console.log(newEmployees[id - 1]);
+      const filepath = `${__dirname}/../data/employeesCopy.json`;
+      const deletedEmployee = await writeDataAsyncPromise(
+        filepath,
+        newEmployees,
+        toBeDeleted
+      );
+      resolve(deletedEmployee);
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
 module.exports = {
   findAllEmployees,
   findSingleEmployee,
   createEmployee,
   updateEmployee,
+  deleteEmployee,
 };
+
+// to do:
+// fix up the ugly 'id - 1' bullshiet.
+// add a function to check if id of employee exists in controller.
